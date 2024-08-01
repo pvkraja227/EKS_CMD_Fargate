@@ -72,15 +72,15 @@ eksctl utils associate-iam-oidc-provider --cluster test-cluster --region us-west
 
 ### How to setup alb add on
 
-Download IAM policy
+(Download IAM policy)
 
 curl -O https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.5.4/docs/install/iam_policy.json
 
-Create IAM Policy
+(Create IAM Policy)
 
 aws iam create-policy --policy-name AWSLoadBalancerControllerIAMPolicy --policy-document file://iam_policy.json
 
-Create IAM Role
+(Create IAM Role)
 
 eksctl create iamserviceaccount --cluster=test-cluster --region us-west-1 --namespace=kube-system --name=aws-load-balancer-controller --role-name amazonEKSLoadBalancerControllerRole --attach-policy-arn=arn:aws:iam::<your-aws-account-id>:policy/AWSLoadBalancerControllerIAMPolicy --approve
 
@@ -105,5 +105,11 @@ kubectl get deployment -n kube-system (4)
 kubectl get ingress -n game-2048 (ExternalIP)
 
 goto EC2/Load Balancer/copy DNS and paste in chrome
+
+OR curl (ExternalIP Link)
+
+### Delete Cluster
+
+eksctl destroy cluster --name test-cluster --region us-west-1
 
 
