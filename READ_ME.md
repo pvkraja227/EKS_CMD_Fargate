@@ -48,11 +48,11 @@ helm (check)
 
 eksctl create cluster --name test-cluster --region us-west-1 --fargate
 
-aws eks update-kubeconfig --name test-cluster --region us-east-1
+aws eks update-kubeconfig --name test-cluster --region us-west-1
 
 ### (Create Fargate profile)
 
-eksctl create fargateprofile --cluster test-cluster --region us-east-1 --name alb-sample-app --namespace game-2048
+eksctl create fargateprofile --cluster test-cluster --region us-west-1 --name alb-sample-app --namespace game-2048
 
 ### (Deploy Deployment, Service and Ingress)
 
@@ -82,21 +82,21 @@ eksctl create iamserviceaccount --cluster=test-cluster --namespace=kube-system -
 
 ### Deploy ALB controller
 
-Add helm repo
+(Add helm repo)
 
 helm repo add eks https://aws.github.io/eks-charts
 
-Update the repo
+(Update the repo)
 
 helm repo update eks
 
-Install
+(Install alb load balancer controller)
 
 helm install aws-load-balancer-controller eks/aws-load-balancer-controller -n kube-system --set clusterName=test-cluster --set serviceAccount.create=false --set serviceAccount.name=aws-load-balancer-controller --set region=us-east-1 --set vpcId=<your-vpc-id>
 
 kubectl get deployment -n kube-system aws-load-balancer-controller (2)
 
-kubectl get ingress -n game-2048
+kubectl get ingress -n pvk
 
 goto EC2/Load Balancer/copy DNS and paste in chrome
 
