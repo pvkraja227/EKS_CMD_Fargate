@@ -64,7 +64,7 @@ kubectl get ingress -n game-2048 (no ExternalIP)
 
 ### (Check if there is an IAM OIDC provider configured already)
 
-eksctl utils associate-iam-oidc-provider --cluster test-cluster --approve
+eksctl utils associate-iam-oidc-provider --cluster test-cluster --region us-west-1 --approve
 
 ### How to setup alb add on
 
@@ -78,7 +78,7 @@ aws iam create-policy --policy-name AWSLoadBalancerControllerIAMPolicy --policy-
 
 Create IAM Role
 
-eksctl create iamserviceaccount --cluster=test-cluster --namespace=kube-system --name=aws-load-balancer-controller --role-name amazonEKSLoadBalancerControllerRole --attach-policy-arn=arn:aws:iam::<your-aws-account-id>:policy/AWSLoadBalancerControllerIAMPolicy --approve
+eksctl create iamserviceaccount --cluster=test-cluster --region us-west-1 --namespace=kube-system --name=aws-load-balancer-controller --role-name amazonEKSLoadBalancerControllerRole --attach-policy-arn=arn:aws:iam::<your-aws-account-id>:policy/AWSLoadBalancerControllerIAMPolicy --approve
 
 ### Deploy ALB controller
 
@@ -96,7 +96,9 @@ helm install aws-load-balancer-controller eks/aws-load-balancer-controller -n ku
 
 kubectl get deployment -n kube-system aws-load-balancer-controller (2)
 
-kubectl get ingress -n pvk
+kubectl get deployment -n kube-system (4)
+
+kubectl get ingress -n game-2048 (ExternalIP)
 
 goto EC2/Load Balancer/copy DNS and paste in chrome
 
