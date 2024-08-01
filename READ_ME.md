@@ -56,10 +56,14 @@ eksctl create fargateprofile --cluster test-cluster --region us-west-1 --name al
 
 ### (Deploy Deployment, Service and Ingress)
 
-kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.5.4/docs/examples/2048/2048_full.yaml
+git clone https://github.com/pvkraja227/EKS_CMD_Fargate.git
+
+kubectl apply -f test.yaml
 
 kubectl get pods -n game-2048 (5)
+
 kubectl get svc -n game-2048 (default, NodePort)
+
 kubectl get ingress -n game-2048 (no ExternalIP)
 
 ### (Check if there is an IAM OIDC provider configured already)
