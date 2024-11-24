@@ -1,3 +1,6 @@
+https://www.youtube.com/watch?v=RRCrY12VY_s
+Kubernetes End to End project on EKS | EKS Install and app deploy with Ingress |
+
 From EC2 OR from cmd line (make sure CLI, Helm, Eksctl, Kubectl are in the same path)
 
 From EC2 Instance:
